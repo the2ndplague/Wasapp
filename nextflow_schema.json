@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/epi2me_wasapp/master/nextflow_schema.json",
+  "title": "WaSPPipe and wf-amplicon Pipeline Wrapper",
+  "description": "Runs the WaSPPipe basecalling, demultiplexing, and downstream analysis pipeline.",
+  "type": "object",
+  "definitions": {
+    "directories": {
+      "title": "Required Paths & Directories",
+      "type": "object",
+      "properties": {
+        "workspace_dir": {
+          "type": "string",
+          "format": "path",
+          "title": "Workspace Directory",
+          "description": "Absolute path to the epi2me_wasapp workspace directory on your machine.",
+          "help_text": "Select the absolute path to the epi2me_wasapp folder. E.g. Y:/Jonathan/Ian_lab_work/epi2me_wasapp",
+          "default": "y:/Jonathan/Ian_lab_work/epi2me_wasapp"
+        },
+        "pod5_dir": {
+          "type": "string",
+          "format": "path",
+          "title": "POD5 Input Directory",
+          "description": "Path to the folder containing input POD5 files.",
+          "help_text": "Select the folder containing pod5 files. E.g. Y:/Jonathan/Ian_lab_work/wasPP_workflow_v2/input/pod5",
+          "default": "../input/pod5"
+        },
+        "dorado_model_path": {
+          "type": "string",
+          "format": "path",
+          "title": "Dorado Model Path",
+          "description": "Path to the Dorado basecalling model directory.",
+          "help_text": "Select the directory of the dorado basecalling model. E.g. Y:/Jonathan/Ian_lab_work/wasPP_workflow_v2/input/packages/dorado-1.4.0-linux-x64/models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+          "default": "../input/packages/dorado-1.4.0-linux-x64/models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0"
+        },
+        "primer_files_dir": {
+          "type": "string",
+          "format": "path",
+          "title": "Primer Files Directory",
+          "description": "Path to the folder containing primer fasta and mastersheet files.",
+          "help_text": "Select the folder containing linked primer and reference fasta files. E.g. Y:/Jonathan/Ian_lab_work/wasPP_workflow_v2/input/primer_files",
+          "default": "../input/primer_files"
+        }
+      },
+      "required": ["workspace_dir", "pod5_dir", "dorado_model_path", "primer_files_dir"]
+    },
+    "options": {
+      "title": "Pipeline Options",
+      "type": "object",
+      "properties": {
+        "run_name": {
+          "type": "string",
+          "title": "Run Name",
+          "default": "exp12",
+          "description": "Name of the sequencing run used for naming outputs."
+        },
+        "kit_name": {
+          "type": "string",
+          "title": "Kit Name",
+          "default": "SQK-NBD114-96",
+          "description": "Ligation/Barcoding kit name for dorado basecalling and demuxing."
+        },
+        "min_qscore": {
+          "type": "integer",
+          "title": "Min Q-Score",
+          "default": 10,
+          "description": "Minimum Q-score filtering threshold for basecalling."
+        },
+        "threads": {
+          "type": "integer",
+          "title": "Threads",
+          "default": 8,
+          "description": "Number of threads to allocate for wf-amplicon."
+        },
+        "notebooklm_exec": {
+          "type": "string",
+          "title": "NotebookLM Executable",
+          "default": "notebooklm",
+          "description": "Command or path to run notebooklm in the system."
+        }
+      }
+    }
+  },
+  "allOf": [
+    { "$ref": "#/definitions/directories" },
+    { "$ref": "#/definitions/options" }
+  ]
+}
