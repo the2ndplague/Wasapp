@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://raw.githubusercontent.com/epi2me_wasapp/master/nextflow_schema.json",
+  "$id": "https://raw.githubusercontent.com/the2ndplague/Wasapp/main/nextflow_schema.json",
   "title": "WaSPPipe and wf-amplicon Pipeline Wrapper",
   "description": "Runs the WaSPPipe basecalling, demultiplexing, and downstream analysis pipeline.",
   "type": "object",
@@ -11,7 +11,7 @@
       "properties": {
         "workspace_dir": {
           "type": "string",
-          "format": "path",
+          "format": "directory-path",
           "title": "Workspace Directory",
           "description": "Absolute path to the epi2me_wasapp workspace directory on your machine.",
           "help_text": "Select the absolute path to the epi2me_wasapp folder. E.g. Y:/Jonathan/Ian_lab_work/epi2me_wasapp",
@@ -19,7 +19,7 @@
         },
         "pod5_dir": {
           "type": "string",
-          "format": "path",
+          "format": "directory-path",
           "title": "POD5 Input Directory",
           "description": "Path to the folder containing input POD5 files.",
           "help_text": "Select the folder containing pod5 files. E.g. Y:/Jonathan/Ian_lab_work/wasPP_workflow_v2/input/pod5",
@@ -27,7 +27,7 @@
         },
         "dorado_model_path": {
           "type": "string",
-          "format": "path",
+          "format": "directory-path",
           "title": "Dorado Model Path",
           "description": "Path to the Dorado basecalling model directory.",
           "help_text": "Select the directory of the dorado basecalling model. E.g. Y:/Jonathan/Ian_lab_work/wasPP_workflow_v2/input/packages/dorado-1.4.0-linux-x64/models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
@@ -35,11 +35,18 @@
         },
         "primer_files_dir": {
           "type": "string",
-          "format": "path",
+          "format": "directory-path",
           "title": "Primer Files Directory",
           "description": "Path to the folder containing primer fasta and mastersheet files.",
           "help_text": "Select the folder containing linked primer and reference fasta files. E.g. Y:/Jonathan/Ian_lab_work/wasPP_workflow_v2/input/primer_files",
           "default": "../input/primer_files"
+        },
+        "outdir": {
+          "type": "string",
+          "format": "directory-path",
+          "title": "Output Directory",
+          "description": "Directory for output of all workflow results.",
+          "default": "./output"
         }
       },
       "required": ["workspace_dir", "pod5_dir", "dorado_model_path", "primer_files_dir"]
